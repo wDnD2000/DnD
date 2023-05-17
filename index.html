@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Character Generator - D&D 5e</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      padding: 10px 24px;
+      margin: 10px 2px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Character Generator - D&D 5e</h1>
+
+  <div id="characterContainer">
+    <h2 id="characterName"></h2>
+    <p id="characterRaceClass"></p>
+    <p id="characterStats"></p>
+  </div>
+
+  <button class="button" onclick="generateCharacter()">Generate Character</button>
+
+  <script>
+    function getRandomElement(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function generateCharacter() {
+      var races = ["Human", "Elf", "Dwarf", "Halfling", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling"];
+      var classes = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"];
+
+      var characterName = getRandomElement(races) + " " + getRandomElement(classes);
+      var characterRaceClass = "Race: " + characterName.split(" ")[0] + "<br>Class: " + characterName.split(" ")[1];
+
+      var characterStats = "Strength: " + getRandomAbilityScore() + "<br>";
+      characterStats += "Dexterity: " + getRandomAbilityScore() + "<br>";
+      characterStats += "Constitution: " + getRandomAbilityScore() + "<br>";
+      characterStats += "Intelligence: " + getRandomAbilityScore() + "<br>";
+      characterStats += "Wisdom: " + getRandomAbilityScore() + "<br>";
+      characterStats += "Charisma: " + getRandomAbilityScore();
+
+      document.getElementById("characterName").innerHTML = characterName;
+      document.getElementById("characterRaceClass").innerHTML = characterRaceClass;
+      document.getElementById("characterStats").innerHTML = characterStats;
+    }
+
+    function getRandomAbilityScore() {
+      var scores = [];
+      for (var i = 0; i < 4; i++) {
+        scores.push(Math.floor(Math.random() * 6) + 1);
+      }
+      scores.sort();
+      scores.shift();
+      return scores.reduce((a, b) => a + b, 0);
+    }
+  </script>
+</body>
+</html>
